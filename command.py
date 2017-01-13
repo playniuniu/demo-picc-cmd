@@ -25,7 +25,7 @@ def run():
     ssh_client = SSHClient(args.ip, args.username, args.password)
     weblogic_tools = WeblogicTools(ssh_client)
     if args.upload:
-        weblogic_tools.upload_config(config.WEBLOGIC_FILE)
+        weblogic_tools.upload_configfile(config.WEBLOGIC_FILE)
     else:
         config_file = weblogic_tools.get_configfile(config.WEBLOGIC_FILE)
         weblogic_tools.format_output(config_file)

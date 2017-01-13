@@ -12,7 +12,7 @@ class SSHClient():
         self.port = port
         self.ssh_client = None
         self.sftp_client = None
-        self.logger = Logger('ParseWeblogicConfig').get_logger()
+        self.logger = Logger('SSHClient').get_logger()
 
     def init_ssh_client(self):
         try:
@@ -71,7 +71,7 @@ class SSHClient():
             try:
                 if direction == "upload":
                     self.sftp_client.put(local_path, remote_path)
-                    self.logger.debug(
+                    self.logger.info(
                         "Upload file {} success!".format(local_path))
                 else:
                     self.sftp_client.get(remote_path, local_path)
