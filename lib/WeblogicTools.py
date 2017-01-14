@@ -62,8 +62,32 @@ class WeblogicTools:
         return self.weblogic_dict
 
     def format_output(self, data):
-        if data:
-            print(data)
+        if not data:
+            return
+
+        divide_line = '-' * 47
+
+        print("\n" + divide_line)
+        print("| {:16s} | {:16s} |".format("Weblogic 基本信息", "信息详情"))
+        print(divide_line)
+
+        print("| {:20s} | {:20s} |".format("Domain Name", data['domain_name']))
+        print("| {:20s} | {:20s} |".format("Version", data['domain_version']))
+        print("| {:20s} | {:20s} |".format("Host Type", data['host_type']))
+        print("| {:20s} | {:20s} |".format("Host Name", data['host_name']))
+        print(divide_line)
+
+        if not data['server_list']:
+            return
+
+        print("\n" + divide_line)
+        print("| {:17s} | {:18s} |".format("Weblogic 服务器", "IP 地址"))
+        print(divide_line)
+
+        for el in data['server_list']:
+            print("| {:20s} | {:20s} |".format(el['name'], el['ip']))
+
+        print(divide_line + "\n")
 
 
 if __name__ == "__main__":

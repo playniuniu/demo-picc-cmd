@@ -43,8 +43,8 @@ class ParseWeblogicConfig:
                 server_type = "ManagedServer"
 
         data.update({
-            "current_server_name": server_name,
-            "current_server_type": server_type
+            "host_name": server_name,
+            "host_type": server_type
         })
         return data
 
