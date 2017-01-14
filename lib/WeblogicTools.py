@@ -37,24 +37,33 @@ class WeblogicTools:
 
     def download_configfile(self, local_path):
         remote_path = self.get_remote_configxml_path()
-        return self.ssh_client.transfile(local_path, remote_path, "download")
+        if remote_path:
+            return self.ssh_client.transfile(local_path, remote_path, "download")
+        else:
+            self.logger.info("stop download file to {}".format(local_path))
+            return False
 
     def upload_configfile(self, local_path):
         remote_path = self.get_remote_configxml_path()
-        return self.ssh_client.transfile(local_path, remote_path, "upload")
+        if remote_path:
+            return self.ssh_client.transfile(local_path, remote_path, "upload")
+        else:
+            self.logger.info("stop upload file from {}".format(local_path))
+            return False
 
     def get_configfile(self, local_path):
         if not self.download_configfile(local_path):
             self.logger.error("Cannot get config.xml file!")
-            return False
+            return {}
 
-        self.weblogic_dict = ParseWeblogicConfig(
-            local_path).parse(self.ssh_client.ip)
+        self.weblogic_dict = ParseWeblogicConfig(local_path).parse(
+            self.ssh_client.ip)
 
         return self.weblogic_dict
 
     def format_output(self, data):
-        print(data)
+        if data:
+            print(data)
 
 
 if __name__ == "__main__":
