@@ -53,9 +53,18 @@ class ParseWeblogicConfig:
         for child in root.findall('ns:server', self.xmlns):
             server_name = child.find('ns:name', self.xmlns)
             server_address = child.find('ns:listen-address', self.xmlns)
+            server_port = child.find('ns:listen-port', self.xmlns)
+            
+            if server_port is not None:
+                parse_server_port = server_port.text
+            else:
+                parse_server_port = "7001"
+                
+
             server_list.append({
                 "name": server_name.text,
-                "ip": server_address.text
+                "ip": server_address.text,
+                "port": parse_server_port
             })
 
         return server_list

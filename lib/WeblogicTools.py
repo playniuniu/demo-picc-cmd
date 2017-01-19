@@ -80,14 +80,19 @@ class WeblogicTools:
         if not data['server_list']:
             return
 
+        divide_line = '-' * 70
         print("\n" + divide_line)
-        print("| {:17s} | {:18s} |".format("Weblogic 服务器", "IP 地址"))
+        print("| {:17s} | {:18s} | {:17s} |".format("Weblogic 服务器", "IP 地址", "端口号"))
         print(divide_line)
 
         for el in data['server_list']:
-            print("| {:20s} | {:20s} |".format(el['name'], el['ip']))
+            print("| {:20s} | {:20s} | {:20s} |".format(el['name'], el['ip'], el['port']))
 
         print(divide_line + "\n")
+
+        managed_len = len(data['server_list']) - 1
+        print("受管总计: {} 个".format(managed_len))
+        print("\n")
 
 
 if __name__ == "__main__":
